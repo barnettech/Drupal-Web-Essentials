@@ -27,66 +27,7 @@ function simple_module_menu() {
   return $items;
 }
 
-/**
- * Implements hook_theme().
- *
- * Information on hook theme http://groups.drupal.org/node/14274#comment-57950.  There are 3 basic steps to creating / using a theme fuction in Drupal.
- *    1. hook_theme which adds an array of callbacks and their arguments to the
- *      theme registry. You must clear cache before the theme function will get
- *      registered.
- *    2. The themable function itself which starts with theme_ followed by the
- *      function name that was added to the registry with hook_theme.
- *    3. Then just call your theme:  theme("whatever_function, $whatever_argument, $whatever_argument ")
- *     this actually calls the function.
- */
-/*Notice that as with all functions in your module's theme you must have the name of the function begin
-  by starting with your module's name then underscore then the hook name in this case -- hook theme
-  is the functionality we're invoking in this case.  Whatever Drupal hook you're calling you replace the
-  word hook with your module's name keep the underscore, then put the hook name you're using.  Here's a
-  list of hooks .... don't worry you only need a handful of them to be very very effective
-  http://api.drupal.org/api/drupal/includes%21module.inc/group/hooks/7  Hooks allow you to interract
-  with Drupal core.  If you're defining your own function it's still best practice to have the first part
-  of the function name begin with your module's name ..*/
-function simple_module_theme() {
-  return array(
-    'simple_module_output' => array(
-      'arguments' => array(
-        'name' => NULL,
-      ),
-    ), 
-  );
-}
-
-/**
- * Implements of hook_theme().
- *
- * @param array $variables
- *   an array with google document listings.
- *
- * @return string
- *   html with output for the user.
- */
-// Notice again that we are actually declaring the theme function itself which will
-// create our output and this time we do prepend the function name with theme_
-function theme_simple_module_output($variables) {
-  /* This line below will only work if you install the devel module and is helpful in debugging,
-   allowing your to 'pretty' print variables, including arrays or objects.  I strongly suggest you
-   download the devel module to help you debug your programs.  http://drupal.org/project/devel*/
-  dpm($variables);
-  /* This line below is also for debugging, and if you have the "database logging" module turned on
-  (the module ships with Drupal core so no need to download it, you just need to enable it) you
-  will see this log message below show up in the log (known as the watchdog log) at this url:
-  http://your_url/admin/reports/dblog  You can also navigate there by clicking the "reports" and
-  then "recent log messages" links from the admin menu or screen (/admin/index)*/
-  watchdog('simple_module', 'got here');
-  /* One last place to look for log messages I must ephasize as well is in your apache log file which
-  is where you'll look for any PHP errors, definitely look there if you get a "WSOD", a "WHITE SCREEN
-  OF DEATH", this is what PHP developers refer to when their page doesn't render because of a FATAL
-  PHP error and you just see a white screen rather than your web page.  From Acquia dev desktop
-  you can find your logs by going to the control panel, then click settings, then go to the log tab.
-  In MAMP on a MAC I go to /Applications/MAMP/logs You can easily google where your apache logs are found
-  by default for whatever flavor of LAMP you have installed.  If you're taking my course feel free
-  to ask for help if you need it.*/
+function simple_module_page(){
   drupal_add_css(drupal_get_path('module', 'simple_module') . '/css/simple_module.css');
   drupal_add_library('system', 'ui.draggable');
   drupal_add_js(drupal_get_path('module', 'simple_module') . '/js/simple_module.js', array(
@@ -103,11 +44,4 @@ Vestibulum semper eleifend eros at semper. Phasellus neque augue, eleifend ut co
 
 Nullam sapien augue, venenatis sit amet ornare et, blandit nec velit. Morbi eu ligula a lacus commodo lacinia vel et neque. Sed at nisi at sapien adipiscing accumsan in fringilla ligula. Nunc fringilla, est vel ullamcorper tincidunt, tellus ligula lobortis turpis, vel gravida purus lacus a dui. Quisque et massa vestibulum nisi dictum lacinia vehicula ac nisi. Nulla facilisi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus sed neque ante, venenatis sagittis dui. Cras lorem ipsum, scelerisque tempor aliquet quis, imperdiet in augue. Curabitur tellus est, ultrices eu sagittis et, pellentesque id enim. Nunc lobortis mattis viverra. Sed non purus ipsum. Aenean ac justo sed urna eleifend consequat.
     </div>';
-  return $content;
-}
-
-
-function simple_module_page(){
-  $content = theme('simple_module_output', array('first_name' => 'Joe', 'last_name' => 'Walton'));
-  return $content;
-}
+  return $content;}
