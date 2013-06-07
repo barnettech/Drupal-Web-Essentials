@@ -1,0 +1,110 @@
+<?php
+/**
+ * @file
+ * A simple module to create a Drupal Block programmatically,
+ * which then can be placed within any region using the block system.
+ * Created by:  Prof. James Barnett, Babson College 2013.
+ */
+
+function create_node_block_info() {
+  // This example comes from node.module.
+  $blocks['create-node-block'] = array(
+    'info' => t('My Block To Create a Node'), 
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  return $blocks;
+}
+
+function create_node_block_view($delta = '') {
+  // This example is adapted from node.module.
+  $block = array();
+
+  switch ($delta) {
+    case 'create-node-block':
+      $content = drupal_get_form('create_node_simple_form');
+      $blocks['subject'] = t('Create a node of type article');
+      $blocks['content'] = $content;
+      break;
+  return $block;
+}
+
+/**
+ * Implements form api to create a quick discussion group.
+ */
+function create_node_simple_form($form) {
+  $form = array();
+  $form['container'] = array();
+  $form['container']['title'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Topic Title'),
+    '#default_value' => 'Title',
+    '#attributes' => array(
+      'style' => 'font-style:italic;',
+      'onfocus' => 'if (this.value == "Title") {this.value=""};this.style.fontStyle="normal";',
+    ),
+  );
+  $form['container']['body'] = array(
+    '#type' => 'textarea',
+    '#rows' => 3,
+    '#resizable' => TRUE,
+    '#title' => t('Topic Description'),
+    '#default_value' => 'Topic Description',
+    '#attributes' => array(
+      'style' => 'font-style:italic;',
+      'onfocus' => 'if (this.value == "Topic Description") {this.value=""};this.style.fontStyle="normal";',
+    ),
+  );
+  $form['container']['invites'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Topic Invitees: <span class="block-form-instructions">Separate multiple invitees with a comma.</span><span class="not-block-form-instructions">Enter usernames or start typing names</span>'),
+    '#autocomplete_path' => 'user/autocomplete',
+    '#suffix' => '',
+    '#default_value' => 'Add Invitees',
+    '#attributes' => array(
+      'style' => 'font-style:italic;',
+      // 'onfocus' => 'this.value="";this.style.fontStyle="normal";',
+    ),
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Submit Discussion'),
+  );
+  return $form;
+}
+
+/**
+ * Implements hook_form_validate().
+ *
+ * Make sure node title is unique.
+ */
+function create_node_form_validate($form, &$form_state) {
+  // You could put validation code, validating data inputed into the form here.
+  // You could make sure that if a name was asked for no numbers were inputed into
+  // the form, etc.
+}
+
+/**
+ * Implements hook_form_submit().
+ *
+ * Submit the form that creates a quick discussion.
+ */
+function create_node_form_submit($form, &$form_state) {
+  // The line below says get the $user variable (which gives you info on the
+  // currently logged in user) which is "global" meaning it's available
+  // system wide within code ... well it's available to use in your code when you
+  // put the below line in your function.
+  global $user;
+  // We set $node to be an object below.
+  $node = new stdClass();
+  $node->type = 'article';
+  // Yes the $user variable is an object and the unique uid of the user is the uid.
+  $node->uid = $user->uid;
+  // See how we pass the title and body values from the form using
+  // the $form_state variable.
+  $node->title = $form_state['values']['title'];
+  $node->body = $form_state['values']['body'];
+  node_save($node);
+  //  Watch on your screen how drupal_set_message looks, its one way to show
+  //  system messages to your users.
+  drupal_set_message(t('Your new node has been created.'));
+}

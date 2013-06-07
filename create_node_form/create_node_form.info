@@ -1,0 +1,8 @@
+name = Create Node Form 
+description = A simple module to create a Drupal Block programmatically, and then within the block there's a form to let users create a node.
+package = Babson Drupal Web Essentials Class
+core = 7.x
+;The line below is commented out as is this one with a semicolon but the below line shows
+;how to list a dependency if your module has one.  List one dependency per line.  The
+;module cannot be installed without the dependency first being installed.
+;dependencies[] = libraries
