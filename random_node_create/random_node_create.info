@@ -1,0 +1,8 @@
+name = Random Note Create 
+description = A simple module which creates a node with a random title when you visit a page.
+package = Babson Drupal Web Essentials Class
+core = 7.x
+;The line below is commented out as is this one with a semicolon but the below line shows
+;how to list a dependency if your module has one.  List one dependency per line.  The
+;module cannot be installed without the dependency first being installed.
+;dependencies[] = libraries

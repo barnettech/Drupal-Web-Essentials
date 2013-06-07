@@ -1,0 +1,46 @@
+<?php
+/**
+ * @file
+ * A simple module to create a new Drupal page with some
+ * basic CSS, HTML, PHP, & Javascript.
+ * Created by:  Prof. James Barnett, Babson College 2013.
+ */
+
+/**
+ * Implements hook_menu().  Hook menu declares a menu item and
+ * a page for said menu item.  This is how you
+ * will create custom pages.  In the below code (We'll explain more about
+ * the PHP involved in a later chapter) you see simple-page is declared as the
+ * url to get to this new page.  You see we define the page's title.  You see
+ * we defined the page callback which basically means, go further into the
+ * code and find the page callback specified (also called a function in PHP *jargon),
+ * in this case simple_module_page.  Then it will execute this page *callback code specified.  We then within this callback put some HTML into *the $content variable and return that content back to render on the screen.  
+ */
+
+function random_node_create_menu() {
+  $items = array();
+  $items['randomly-create-a-node'] = array(
+    'title' => 'A Drupal Page that Creates Nodes for Absolutely No Good Reason Outside of Teaching Drupal',
+    'page callback' => 'random_node_create_new_node',
+    'access arguments' => array('view content'),
+  );
+  return $items;
+}
+
+function random_node_create_new_node() {
+  $rand = rand(1, 5000);
+  $body_text = 'This node was created programmatically ' . $rand;
+  
+  $node = new stdClass();
+  $node->type = 'article';
+  node_object_prepare($node);
+  
+  $node->title    = 'Node Created Programmatically on ' . date('Y-m-d, H:i:s');
+  $node->language = LANGUAGE_NONE;
+
+  $node->body[$node->language][0]['value']   = $body_text;
+  $node->body[$node->language][0]['summary'] = text_summary($body_text);
+  $node->body[$node->language][0]['format']  = 'filtered_html';
+  node_save($node);
+  return 'node with nid: ' . $node->nid . ' successfully created programmatically at ' . l('link to new node', 'node/' . $node->nid);
+}
