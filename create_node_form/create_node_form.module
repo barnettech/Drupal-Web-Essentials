@@ -1,8 +1,8 @@
 <?php
 /**
  * @file
- * A simple module to create a Drupal Block programmatically,
- * which then can be placed within any region using the block system.
+ * A simple module showing how to create a form within a block,
+ * which will create a new node. 
  * Created by:  Prof. James Barnett, Babson College 2013.
  */
 
@@ -105,7 +105,8 @@ function create_node_form_simple_form_submit($form, &$form_state) {
   // See how we pass the title and body values from the form using
   // the $form_state variable.
   $node->title = $form_state['values']['title'];
-  $node->body = $form_state['values']['body'];
+  $node->body['und'][0]['value'] = $form_state['values']['body'];
+  $node->body['und'][0]['format'] = 'filtered_html';
   $node->promote = 1;
   node_save($node);
   //  Watch on your screen how drupal_set_message looks, its one way to show
