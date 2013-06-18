@@ -79,7 +79,7 @@ function theme_simple_module_output($variables) {
   http://your_url/admin/reports/dblog  You can also navigate there by clicking the "reports" and
   then "recent log messages" links from the admin menu or screen (/admin/index)*/
   watchdog('simple_module', 'got here');
-  /* One last place to look for log messages I must ephasize as well is in your apache log file which
+  /* One last place to look for log messages I must emphasize as well is in your apache log file which
   is where you'll look for any PHP errors, definitely look there if you get a "WSOD", a "WHITE SCREEN
   OF DEATH", this is what PHP developers refer to when their page doesn't render because of a FATAL
   PHP error and you just see a white screen rather than your web page.  From Acquia dev desktop
