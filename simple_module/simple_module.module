@@ -108,6 +108,7 @@ Nullam sapien augue, venenatis sit amet ornare et, blandit nec velit. Morbi eu l
 
 
 function simple_module_page(){
+  /* The below line is where we finally call our new theme function invoking it to put output on the screen */
   $content = theme('simple_module_output', array('first_name' => 'Joe', 'last_name' => 'Walton'));
   return $content;
 }
