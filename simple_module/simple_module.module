@@ -35,7 +35,7 @@ function simple_module_page(){
   $content = '
     <div class="myDiv">
       <div class="bg"></div>
-        Hello World ' . $variables['first_name'] . ' ' . $variables['last_name'] . ' From Out Theme Function!!!!!
+        Hello World
         
         Some random text to show off this transparent background ....
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nisi purus, gravida sit amet molestie et, facilisis vel nulla. Mauris faucibus augue eu quam feugiat at lacinia velit malesuada. Sed bibendum faucibus mattis. Maecenas quis ligula nibh, sit amet iaculis metus. Aenean lobortis massa ut nulla tristique eu vestibulum leo eleifend. Maecenas arcu lectus, facilisis in mattis sed, pretium et metus. Phasellus elementum, elit fringilla mollis sollicitudin, ipsum odio vestibulum quam, vitae tristique odio tortor eu augue. Pellentesque volutpat placerat neque, sit amet vehicula lectus commodo vitae. Aliquam nec mauris pharetra velit tincidunt consectetur. Aliquam vitae lectus nisi. Curabitur mi sapien, ultrices quis bibendum eu, ultricies eget libero. Donec mollis malesuada est a varius. Vestibulum dignissim venenatis nisl, nec semper massa tincidunt egestas. Maecenas a erat sem.
