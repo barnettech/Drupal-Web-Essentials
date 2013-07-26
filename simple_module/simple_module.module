@@ -22,7 +22,7 @@ function simple_module_menu() {
   $items['simple-page'] = array(
     'title' => 'A basic Drupal page created programmaticaly',
     'page callback' => 'simple_module_page',
-    'access arguments' => array('view content'),
+    'access arguments' => array('access content'),
   );
   return $items;
 }
