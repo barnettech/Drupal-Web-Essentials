@@ -68,11 +68,11 @@ function simple_module_theme() {
  */
 // Notice again that we are actually declaring the theme function itself which will
 // create our output and this time we do prepend the function name with theme_
-function theme_simple_module_output($variables) {
+function theme_simple_module_output($name) {
   /* This line below will only work if you install the devel module and is helpful in debugging,
    allowing your to 'pretty' print variables, including arrays or objects.  I strongly suggest you
    download the devel module to help you debug your programs.  http://drupal.org/project/devel*/
-  dpm($variables);
+  dpm($name);
   /* This line below is also for debugging, and if you have the "database logging" module turned on
   (the module ships with Drupal core so no need to download it, you just need to enable it) you
   will see this log message below show up in the log (known as the watchdog log) at this url:
@@ -90,11 +90,22 @@ function theme_simple_module_output($variables) {
   drupal_add_css(drupal_get_path('module', 'simple_module') . '/css/simple_module.css');
   drupal_add_library('system', 'ui.draggable');
   drupal_add_js(drupal_get_path('module', 'simple_module') . '/js/simple_module.js', array(
-        'scope' => 'footer'));
-  $content = '
-    <div class="myDiv">
+    'scope' => 'footer'));
+  // With the PHP added but keeping the CSS and JS
+  $content = '<div class="myDiv">
       <div class="bg"></div>
-        Hello World ' . $variables['first_name'] . ' ' . $variables['last_name'] . ' From Out Theme Function!!!!!
+      <p><h1>HELLO WORLD!!!!! </h1></p>';
+  $x = 1;
+  $my_object = new stdClass;
+  $my_object->first_name = 'Jimbo';
+  $my_object->last_name = 'Bob';
+  $content .= 'Hello ' . $my_object->first_name . ' ' . $my_object->last_name . '</br>';
+  foreach($my_object as $property) {
+    $content .= 'property ' . $x . ' in the object is : '. $property . '</br>';
+    $x = $x + 1;
+  }
+  $content .= '
+        Hello World ' . $name['first_name'] . ' ' . $name['last_name'] . ' From Out Theme Function!!!!!
         
         Some random text to show off this transparent background ....
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nisi purus, gravida sit amet molestie et, facilisis vel nulla. Mauris faucibus augue eu quam feugiat at lacinia velit malesuada. Sed bibendum faucibus mattis. Maecenas quis ligula nibh, sit amet iaculis metus. Aenean lobortis massa ut nulla tristique eu vestibulum leo eleifend. Maecenas arcu lectus, facilisis in mattis sed, pretium et metus. Phasellus elementum, elit fringilla mollis sollicitudin, ipsum odio vestibulum quam, vitae tristique odio tortor eu augue. Pellentesque volutpat placerat neque, sit amet vehicula lectus commodo vitae. Aliquam nec mauris pharetra velit tincidunt consectetur. Aliquam vitae lectus nisi. Curabitur mi sapien, ultrices quis bibendum eu, ultricies eget libero. Donec mollis malesuada est a varius. Vestibulum dignissim venenatis nisl, nec semper massa tincidunt egestas. Maecenas a erat sem.

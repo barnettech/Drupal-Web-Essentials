@@ -1,6 +1,8 @@
 (function($) {
     $(document).ready(function() {
-      console.log('hello');
-      $('.title').draggable();     
+      $('#page-title').click(function(){
+        console.log('hello');
+        $('#page-title').css('color', 'blue');
+      });
     });
 }(jQuery));
