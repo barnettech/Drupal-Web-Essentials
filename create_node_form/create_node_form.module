@@ -24,12 +24,6 @@ function create_node_form_block_view($delta = '') {
       // Note wrapping your text in the t() function allows for easy
       // translations should you ever need your site to show in
       // other languages.
-      $result = db_query("select n.title, u.uid, n.created from node n,
-                         users u where u.uid = n.uid order by n.created desc limit 5");
-      $content = "";
-      foreach($result as $row){
-        $content .= $row->title . '</br>';
-      }
       $block['subject'] = t('Create Node Form');
       $block['content'] = drupal_get_form('create_node_form_simple_form');
       break;
@@ -65,7 +59,7 @@ function create_node_form_simple_form($form) {
   );
   $form['submit'] = array(
     '#type' => 'submit',
-    '#value' => t('Submit Discussion'),
+    '#value' => t('Submit Form'),
   );
   return $form;
 }
