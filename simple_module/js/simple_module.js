@@ -1,6 +1,7 @@
 (function($) {
     $(document).ready(function() {
       console.log('hello');
-      $('.title').draggable();     
+      $('#page-title').draggable();     
     });
+    $( "#accordion" ).accordion();
 }(jQuery));
