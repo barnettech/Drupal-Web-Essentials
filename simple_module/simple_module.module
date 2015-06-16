@@ -30,6 +30,7 @@ function simple_module_menu() {
 function simple_module_page(){
   $content = '<p><h1>HELLO WORLD!!!!! </h1></p>';
   $x = 1;
+  $my_object = new stdClass();
   $my_object->first_name = 'Jimbo';
   $my_object->last_name = 'Bob';
   $content .= 'Hello ' . $my_object->first_name . ' ' . $my_object->last_name . '</br>';
